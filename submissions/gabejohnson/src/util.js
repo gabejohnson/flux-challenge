@@ -14,4 +14,4 @@ function lastSithHasApprentice(state) {
   return lastValid && lastValid.apprentice.id !== null
 }
 
-export default {thereIsAMatch, firstSithHasMaster, lastSithHasApprentice}
+export {thereIsAMatch, firstSithHasMaster, lastSithHasApprentice}

@@ -42,7 +42,7 @@ export function request(state$) {
     .map(missingSiths)
     .compose(flattenConcurrently)
     .map(sith => sith.url)
-    .startWith(API_PATH + `/dark-jedis/${DARTH_SIDIOUS_ID}`)
+    .startWith(`${API_PATH}/dark-jedis/${DARTH_SIDIOUS_ID}`)
 }
 
 export function response(HTTPSource) {
@@ -52,24 +52,3 @@ export function response(HTTPSource) {
     .map(res => res.body)
     .remember()
 }
-
-// function http(HTTPSource, state$) {
-//   const request$ = state$
-//     .map(stateHash)
-//     .compose(dropRepeats())
-//     .map(missingSiths)
-//     .compose(flattenConcurrently)
-//     .map(sith => sith.url)
-//     .startWith(API_PATH + `/dark-jedis/${DARTH_SIDIOUS_ID}`)
-//
-//   const response$ =
-//     // When there is match, cancel all previous pending requests
-//     // `flatten` has the cancelling logic.
-//     xs.merge(HTTPSource, state$.filter(thereIsAMatch).map(() => xs.of(null)))
-//     .flatten()
-//     .filter(x => Boolean(x))
-//     .map(res => res.body)
-//     .remember()
-//
-//   return {request$, response$}
-// }

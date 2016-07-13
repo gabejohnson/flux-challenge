@@ -14879,7 +14879,7 @@ function request(state$) {
     return stateHash(x) === stateHash(y);
   })).map(missingSiths).compose(_flattenConcurrently2.default).map(function (sith) {
     return sith.url;
-  }).startWith(API_PATH + ('/dark-jedis/' + DARTH_SIDIOUS_ID));
+  }).startWith(API_PATH + '/dark-jedis/' + DARTH_SIDIOUS_ID);
 }
 
 function response(HTTPSource) {
@@ -14887,27 +14887,6 @@ function response(HTTPSource) {
     return res.body;
   }).remember();
 }
-
-// function http(HTTPSource, state$) {
-//   const request$ = state$
-//     .map(stateHash)
-//     .compose(dropRepeats())
-//     .map(missingSiths)
-//     .compose(flattenConcurrently)
-//     .map(sith => sith.url)
-//     .startWith(API_PATH + `/dark-jedis/${DARTH_SIDIOUS_ID}`)
-//
-//   const response$ =
-//     // When there is match, cancel all previous pending requests
-//     // `flatten` has the cancelling logic.
-//     xs.merge(HTTPSource, state$.filter(thereIsAMatch).map(() => xs.of(null)))
-//     .flatten()
-//     .filter(x => Boolean(x))
-//     .map(res => res.body)
-//     .remember()
-//
-//   return {request$, response$}
-// }
 
 },{"./util":"/Users/gabejohnson/projects/flux-challenge/submissions/gabejohnson/src/util.js","xstream":"/Users/gabejohnson/projects/flux-challenge/submissions/gabejohnson/node_modules/xstream/index.js","xstream/extra/dropRepeats":"/Users/gabejohnson/projects/flux-challenge/submissions/gabejohnson/node_modules/xstream/extra/dropRepeats.js","xstream/extra/flattenConcurrently":"/Users/gabejohnson/projects/flux-challenge/submissions/gabejohnson/node_modules/xstream/extra/flattenConcurrently.js"}],"/Users/gabejohnson/projects/flux-challenge/submissions/gabejohnson/src/intent.js":[function(require,module,exports){
 'use strict';
@@ -14938,8 +14917,6 @@ exports.default = intent;
 'use strict';
 
 var _xstreamRun = require('@cycle/xstream-run');
-
-var _xstreamRun2 = _interopRequireDefault(_xstreamRun);
 
 var _dom = require('@cycle/dom');
 
@@ -14985,7 +14962,7 @@ var drivers = {
   WS: (0, _drivers.makeWSDriver)('ws://localhost:4000')
 };
 
-(0, _xstreamRun2.default)(main, drivers);
+(0, _xstreamRun.run)(main, drivers);
 
 },{"./drivers":"/Users/gabejohnson/projects/flux-challenge/submissions/gabejohnson/src/drivers.js","./http":"/Users/gabejohnson/projects/flux-challenge/submissions/gabejohnson/src/http.js","./intent":"/Users/gabejohnson/projects/flux-challenge/submissions/gabejohnson/src/intent.js","./model":"/Users/gabejohnson/projects/flux-challenge/submissions/gabejohnson/src/model.js","./view":"/Users/gabejohnson/projects/flux-challenge/submissions/gabejohnson/src/view.js","@cycle/dom":"/Users/gabejohnson/projects/flux-challenge/submissions/gabejohnson/node_modules/@cycle/dom/lib/index.js","@cycle/http":"/Users/gabejohnson/projects/flux-challenge/submissions/gabejohnson/node_modules/@cycle/http/lib/index.js","@cycle/xstream-run":"/Users/gabejohnson/projects/flux-challenge/submissions/gabejohnson/node_modules/@cycle/xstream-run/lib/index.js"}],"/Users/gabejohnson/projects/flux-challenge/submissions/gabejohnson/src/model.js":[function(require,module,exports){
 'use strict';
@@ -15132,7 +15109,9 @@ function lastSithHasApprentice(state) {
   return lastValid && lastValid.apprentice.id !== null;
 }
 
-exports.default = { thereIsAMatch: thereIsAMatch, firstSithHasMaster: firstSithHasMaster, lastSithHasApprentice: lastSithHasApprentice };
+exports.thereIsAMatch = thereIsAMatch;
+exports.firstSithHasMaster = firstSithHasMaster;
+exports.lastSithHasApprentice = lastSithHasApprentice;
 
 },{}],"/Users/gabejohnson/projects/flux-challenge/submissions/gabejohnson/src/view.js":[function(require,module,exports){
 'use strict';

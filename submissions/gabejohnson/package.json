@@ -6,7 +6,7 @@
   "scripts": {
     "browserify": "browserify src/main.js --full-paths -t babelify --outfile dist/index.js"
   },
-  "author": "Andre Staltz",
+  "author": "Gabe Johnson",
   "license": "MIT",
   "dependencies": {
     "@cycle/dom": "^10.0.6",
